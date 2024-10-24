@@ -1,0 +1,59 @@
+:root{
+    color-scheme: light dark;
+}
+:root {
+    --text-color: light-dark(#333, rgb(222,222,222));
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: light-dark(rgb(222,222,222), #333);
+}
+
+*{
+    font-family: "Noto Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 30%;
+    height: 20%;
+}
+
+  
+th, td{
+padding: 8px;
+border: 1px solid #ccc;
+text-align: left;
+text-align: center;
+}
+
+th{
+    font-size: 25px;
+}
+
+td{
+    font-size: 30px;
+}
+
+
+input, #displayNumArea {
+    width: 60%;
+    padding: 10px 15px;
+    font-size: 40px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    word-spacing: 0.5em;
+}
+
+#displayNumArea{
+    overflow: hidden;
+}
