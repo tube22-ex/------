@@ -56,4 +56,10 @@ input, #displayNumArea {
 
 #displayNumArea{
     overflow: hidden;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+#status{
+    margin: 10px 0px;
 }
