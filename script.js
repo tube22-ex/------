@@ -8,24 +8,38 @@ class Num {
         this.addEvent();
         this.NumArr = [];
         this.status = {keyCnt : 0, wordCnt : 0};
+        const mode = localStorage.getItem('spaceMode');
+        const s = (mode != undefined ) ? mode : false;
+        console.log(s);
+        this.is_Checked = (typeof s !== 'boolean') ? this.toBoolean(s) : s;
+        this.checkbox.checked = this.is_Checked;
+    }
+
+    toBoolean(str){
+        return str.toLowerCase() === 'true';
     }
 
     addEvent(){
         this.InputCustomNum.addEventListener('change',()=>{this.InputCustomNumEvent()});
         this.InputNum.addEventListener('input',(e)=>{this.InputNumCheck(e.target.value)});
+        this.checkbox.addEventListener('change',(e)=>{
+            localStorage.setItem('spaceMode', e.target.checked);
+            this.is_Checked = e.target.checked;
+            this.checkbox.checked = this.is_Checked;
+        })
     }
 
     setup(){
         for(let i = 0; i < 20; i++){
             this.addNumber();
         }
-        display.NumArea(this.NumArr, this.checkbox.checked);
+        display.NumArea(this.NumArr, this.is_Checked);
     }    
 
     addNumber(){
         const ran = this.randomNumber();
         this.NumArr.push(ran);
-        if(this.checkbox.checked) this.NumArr.push(' ');
+        if(this.is_Checked) this.NumArr.push(' ');
     }
 
     InputCustomNumEvent(){
