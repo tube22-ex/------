@@ -63,3 +63,17 @@ input, #displayNumArea {
 #status{
     margin: 10px 0px;
 }
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0 !important;
+    padding: 0;
+    vertical-align: middle;
+}
+
+
+#Mode{
+    margin: 0.5em;
+    align-items: center;
+}

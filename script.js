@@ -2,6 +2,7 @@ class Num {
     constructor() {
         this.InputCustomNum = document.getElementById('InputCustomNum');
         this.InputNum = document.getElementById('InputNum');
+        this.checkbox = document.getElementById('checkbox');
         this.CustomNum = "0";
         this.digitCnt = 0;
         this.addEvent();
@@ -15,16 +16,16 @@ class Num {
     }
 
     setup(){
-        for(let i=0;i<20;i++){
+        for(let i = 0; i < 20; i++){
             this.addNumber();
         }
-        display.NumArea(this.NumArr);
-    }
+        display.NumArea(this.NumArr, this.checkbox.checked);
+    }    
 
     addNumber(){
         const ran = this.randomNumber();
         this.NumArr.push(ran);
-        this.NumArr.push(' ');
+        if(this.checkbox.checked) this.NumArr.push(' ');
     }
 
     InputCustomNumEvent(){
@@ -80,12 +81,15 @@ class Display {
         this.keys_td = document.querySelector('.keys_td');
         this.currentTime_td = document.querySelector('.currentTime_td');
         this.displayNumArea = document.getElementById('displayNumArea');
+        this.is_Checked = false;
     }
 
-    NumArea(NumArr){
-        const typeText = NumArr.join('').replaceAll(' ','&nbsp;');
+    NumArea(NumArr, isChecked){
+        if(isChecked != undefined) this.is_Checked = isChecked;
+        const joinChar = this.is_Checked ? '' : ' ';
+        const typeText = NumArr.join(joinChar).replace(/ /g, '&nbsp;'); 
         this.displayNumArea.innerHTML = typeText;
-    }
+    }    
 
     status(statusObj){
         this.keys_td.textContent = statusObj.keyCnt;
