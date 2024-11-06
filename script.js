@@ -3,6 +3,7 @@ class Num {
         this.InputCustomNum = document.getElementById('InputCustomNum');
         this.InputNum = document.getElementById('InputNum');
         this.checkbox = document.getElementById('checkbox');
+        this.pauseBtn = document.getElementById('pauseBtn');
         this.CustomNum = "0";
         this.digitCnt = 0;
         this.addEvent();
@@ -13,6 +14,7 @@ class Num {
         console.log(s);
         this.is_Checked = (typeof s !== 'boolean') ? this.toBoolean(s) : s;
         this.checkbox.checked = this.is_Checked;
+        this.isPaused = false;
     }
 
     toBoolean(str){
@@ -27,6 +29,20 @@ class Num {
             this.is_Checked = e.target.checked;
             this.checkbox.checked = this.is_Checked;
         })
+        this.pauseBtn.addEventListener('click',()=>{
+            if(!this.isPaused){
+                this.isPaused = true;
+                timer.pause();
+                this.pauseBtn.textContent = '再開'
+                this.InputNum.setAttribute('disabled', "");
+            }else{
+                this.isPaused = false;
+                this.pauseBtn.textContent = '一時停止'
+                this.InputNum.removeAttribute('disabled');
+                timer.start();
+                this.InputNum.focus();
+            }
+        })
     }
 
     setup(){
@@ -34,6 +50,7 @@ class Num {
             this.addNumber();
         }
         display.NumArea(this.NumArr, this.is_Checked);
+        this.pauseBtn.style.visibility = 'visible';//一時停止ボタンを表示
     }    
 
     addNumber(){
@@ -70,7 +87,7 @@ class Num {
             if(this.isMatch){
                 if(this.NumArr[0] == this.CustomNum){
                     //Custom数字が一致した時
-                    timer.stop();
+                    timer.pause();
                     this.NumArr = [];
                     this.isCustomNumMatch = true;
                 }
@@ -169,7 +186,7 @@ class Timer{
         }
     }
 
-    stop(){
+    pause(){
         if(this.is_running){
             this.is_running = false;
             this.interimTime = this.getTime('normal');
